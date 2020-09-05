@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div style="text-align: center;">
+      <div style="margin: 50px;">
+        <h2>
+          {{title}}
+        </h2>
+      </div>
+      <form [formGroup]="signupForm">
+        <div>
+          <mat-form-field>
+            <input matInput name="name" formControlName="name" placeholder="Enter Name">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput name="phoneNo" formControlName="phoneNo" placeholder="Enter Phone Number">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput name="email" formControlName="email" placeholder="Enter Email">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput name="password" [maxlength]="validatorObject['maxLength']"
+              [minlength]="validatorObject['minLength']" type="password" formControlName="password"
+              placeholder="Enter Password">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <textarea matInput name="about" formControlName="about" placeholder="Enter About Yourself"></textarea>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-select name="gender" formControlName="gender" placeholder="Select Genders">
+              <mat-option *ngFor="let type of genders" [value]="type.value">
+                {{ type.display }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Choose a date of birth</mat-label>
+            <input matInput [max]="maxDOB" [matDatepicker]="picker" name="dob" formControlName="dob"
+              placeholder="Choose a date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <span>
+          <button mat-raised-button type="submit" [disabled]=signupForm.invalid (click)="userSignup()"
+            color="primary">Sign Up</button>
+        </span>
+      </form>
+      <div>
+        <a class="nav-link" href="login">Already have an account? Login</a>
+      </div>
+    </div>
+  </div>
+</div>

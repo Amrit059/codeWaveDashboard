@@ -1,0 +1,65 @@
+<ng-template [ngIf]="userModel.length >0">
+  <div>
+    <p>
+      <span style="margin: 100px;">
+        <mat-form-field>
+          <input matInput [(ngModel)]="search" type="search" placeholder="Search Email, Name, PhoneNo"
+            (ngModelChange)="searchFunction($event)" />
+        </mat-form-field>
+      </span>
+      <span style="margin: 100px;">
+        <mat-form-field>
+          <mat-select name="sort" (selectionChange)="sortedBy($event)" placeholder="Sorted By">
+            <mat-option *ngFor="let type of sortedby" [value]="type.value">
+              {{ type.display }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+      <span style="margin: 100px;">
+        <mat-form-field>
+          <mat-select [(value)]="selectedOrder" name="order" (selectionChange)="orderBy($event)"
+            placeholder="Ordered By">
+            <mat-option *ngFor="let type of orderedBy" [(value)]="type.value">
+              {{ type.display }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+    </p>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Date of Birth</th>
+        <th>Status</th>
+        <th>Bio</th>
+      </tr>
+      <tr *ngFor="let item of userModel">
+        <td>{{item.name}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.phoneNo}}</td>
+        <td>{{item.dob | date: 'dd/MM/yyyy'}}</td>
+        <td>{{item.isActive}}</td>
+        <td>{{item.about}}</td>
+      </tr>
+    </table>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="userModel.length==0">
+  <div class="container">
+    <button mat-raised-button type="submit" (click)="backButton()"
+    color="primary">Back</button>
+    <div class="row justify-content-md-center">
+      <div style="text-align: center;">
+
+        There is no data list.
+
+      </div>
+    </div>
+  </div>
+</ng-template>
